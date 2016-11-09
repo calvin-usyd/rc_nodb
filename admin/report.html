@@ -1,0 +1,204 @@
+<!doctype html><html xmlns:ng="http://angularjs.org" id="ng-app" lang="en" ng-app="voteApp"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="Description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poster Presentation  {{year}}</title>
+  <base href="/rc/">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.ori.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+  
+    <link rel="stylesheet" href="css/angular-motion.min.css">
+    <link rel="stylesheet" href="css/bootstrap-additions.min.css">
+    <script src="js/angular.min.js" data-semver="1.2.23"></script>
+    <script src="js/angular-animate.min.js" data-semver="1.2.23"></script>
+    <script src="js/angular-sanitize.min.js" data-semver="1.2.23"></script>
+	<script src="js/angular-strap/dist/angular-strap.js" data-semver="v2.1.1"></script>
+    <script src="js/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.1.1"></script>
+    
+  </head><body ng-controller="voteController" class="ng-scope">
+  <header class="headerBg text-center">
+	<h1>Poster Presentation {{year}}</h1>
+  </header>
+  
+  <br/>
+  <article class="container">
+    <div class="row">
+	  <h2 class="text-center headerBg borderRad">Poster Selection Result</h2>
+	  <section class="col-md-6 borderRad1" id="mainBody">
+			<h3 class="text-warning">Undergraduate Civil Engineering</h3>
+			<table class="table table-striped table-hover alert-warning alert">
+			  <thead>
+				<tr>
+				  <th>#</th>
+				  <th>Name</th>
+				  <th class="text-center">Scores</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr ng-repeat="obj in UndergraduateCE|orderBy:'total':true track by $index" class="Undergraduate{{obj.total}}">
+				  <td class="col-xs-1 text-center">{{$index+1}}</td>
+				  <td class="col-xs-10"><a href="{{obj.pdf}}" target="_blank">{{obj.project}}</a><br>{{obj.student1}}<br>{{obj.student2}}<br>{{obj.student3}}</td>
+				  <td class="col-xs-1 text-center">{{obj.total}}</td>
+				</tr>
+			  </tbody>
+			</table>
+	  </section>
+		
+	  <section class="col-md-6 borderRad1" id="mainBody">
+			<h3 class="text-success">Postgraduate Civil Engineering</h3>
+			<table class="table table-striped table-hover alert-success alert">
+			  <thead>
+				<tr>
+				  <th>#</th>
+				  <th>Name</th>
+				  <th class="text-center">Scores</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr ng-repeat="obj in PostgraduateCE|orderBy:'total':true track by $index">
+				  <td class="col-xs-1 text-center">{{$index+1}}</td>
+				  <td class="col-xs-10"><a href="{{obj.pdf}}" target="_blank">{{obj.project}}</a><br>{{obj.student1}}<br>{{obj.student2}}<br>{{obj.student3}}</td>
+				  <td class="col-xs-1 text-center">{{obj.total}}</td>
+				</tr>
+				<tr>
+				  <td class="col-xs-1 text-center">9</td>
+				  <td class="col-xs-10"><a href="http://quantumfi.net/rc/images/posters_2016/PostgraduateCE/pdf/conversazione_poster_affordance_submitted.pdf?1.47755571799E+12" target="_blank">Design Strategies for Controlling Affordances</a><br>Leonardo Burlamaqui</td>
+				  <td class="col-xs-1 text-center">0</td>
+				</tr>
+			  </tbody>
+			</table>
+	  </section>
+	  <section class="col-md-6 borderRad1" id="mainBody">
+			<h3 class="text-warning">Undergraduate Project Management</h3>
+			<table class="table table-striped table-hover alert-warning alert">
+			  <thead>
+				<tr>
+				  <th>#</th>
+				  <th>Name</th>
+				  <th class="text-center">Scores</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr ng-repeat="obj in UndergraduatePM|orderBy:'total':true track by $index">
+				  <td class="col-xs-1 text-center">{{$index+1}}</td>
+				  <td class="col-xs-10"><a href="{{obj.pdf}}" target="_blank">{{obj.project}}</a><br>{{obj.student1}}<br>{{obj.student2}}<br>{{obj.student3}}</td>
+				  <td class="col-xs-1 text-center">{{obj.total}}</td>
+				</tr>
+			  </tbody>
+			</table>
+	  </section>
+		
+	  <section class="col-md-6 borderRad1" id="mainBody">
+			<h3 class="text-success">Postgraduate Project Management</h3>
+			<table class="table table-striped table-hover alert-success alert">
+			  <thead>
+				<tr>
+				  <th>#</th>
+				  <th>Name</th>
+				  <th class="text-center">Scores</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr ng-repeat="obj in PostgraduatePM|orderBy:'total':true track by $index">
+				  <td class="col-xs-1 text-center">{{$index+1}}</td>
+				  <td class="col-xs-10"><a href="{{obj.pdf}}" target="_blank">{{obj.project}}</a><br>{{obj.student1}}<br>{{obj.student2}}<br>{{obj.student3}}</td>
+				  <td class="col-xs-1 text-center">{{obj.total}}</td>
+				</tr>
+				<tr>
+				  <td class="col-xs-1 text-center">7</td>
+				  <td class="col-xs-10"><a href="http://quantumfi.net/rc/images/posters_2016/PostgraduatePM/pdf/Team_L_POSTER.pdf?1.47755388412E+12" target="_blank">PMO Value Management</a><br>Yuting Jin,Xuying Li, Sylar Yang, Vanessa Carolina Zamora Urrea, Xinrong Chu</td>
+				  <td class="col-xs-1 text-center">0</td>
+				</tr>
+			  </tbody>
+			</table>
+	  </section>
+	  <section class="col-md-12 pull-right">
+		<a href="javascript:window.print()" class="btn btn-primary pull-right" id="print-button">Print</a>
+	  </section>
+	</div>
+  </article>
+  <br/>
+</body></html>
+<style>
+.Undergraduate2, .Undergraduate1{
+	display:none;
+}
+</style>
+<script>
+angular.module('voteApp', ['ngAnimate', 'ngSanitize', 'mgcrea.ngStrap'])
+
+.config(function($modalProvider) {
+  angular.extend($modalProvider.defaults, {
+    html: true
+  });
+})
+.controller('voteController', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
+  $http.get('/rc/admin/controller.php?p=rep').success(function(data) {
+    
+	var d = new Date();
+    $scope.year=d.getFullYear();
+   
+	//$scope.result1 = [];
+	$scope.UndergraduateCE = [];
+	$scope.PostgraduateCE = [];
+	$scope.UndergraduatePM = [];
+	$scope.PostgraduatePM = [];
+	
+	//console.log(data);
+	//console.log(data.Undergraduate);
+	//console.log(data.Postgraduate);
+	//if (data[0] == 'Undergraduate'){
+		 angular.forEach(data.UndergraduateCE, function (item) {
+			$scope.UndergraduateCE.push(item);
+		});
+		angular.forEach(data.PostgraduateCE, function (item) {
+			$scope.PostgraduateCE.push(item);
+		});
+		 angular.forEach(data.UndergraduatePM, function (item) {
+			$scope.UndergraduatePM.push(item);
+		});
+		angular.forEach(data.PostgraduatePM, function (item) {
+			$scope.PostgraduatePM.push(item);
+		});
+	//}
+  });
+  
+  $scope.detail = function(jpgFN){
+	projectN = '';
+	studentN1 = '';
+	studentN2 = '';
+	studentN3 = '';
+
+	$http.post('panel/controller.php?p=posterDetail', {pdfUrl:jpgFN.replace('.jpg', '.pdf')}).success(function(data){
+	//console.log(data);
+		if (data['code'] && data['code'] == 'fail'){
+			$scope.detailMsg = data['msg'];
+			
+		}else{
+			if (data[0]){
+				data = data[0];
+				projectN = data['project'];
+				studentN1 = data['student1'];
+				studentN2 = data['student2'];
+				studentN3 = data['student3'];
+				//console.log(pdfUrl);
+				//console.log(data);
+			}
+			if (projectN && studentN1 && studentN2 && studentN3){
+				$scope.modal = {
+					title: ' Detail', 
+					content: 'Project Name: '+projectN+'<br/>Student 1:'+studentN1+'<br/>Student 2:'+studentN2+'<br/>Student 3:'+studentN3+'<br/>'
+				};
+				
+			}else{
+				$scope.modal = {title: ' Detail', content: 'Detail not found!'};
+			}
+		}
+	});
+  }
+}]);
+</script>

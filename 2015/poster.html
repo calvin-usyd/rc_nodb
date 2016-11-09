@@ -1,0 +1,96 @@
+<!doctype html><html xmlns:ng="http://angularjs.org" id="ng-app" lang="en" ng-app="voteApp"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="Description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Conversazione</title>
+  <base href="/rc/">
+  <link rel="icon" href="/views/img/quantumfi-icon.png">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.ori.css">
+  <link rel="stylesheet" href="css/main.css">
+  
+    <link rel="stylesheet" href="css/angular-motion.min.css">
+    <link rel="stylesheet" href="css/bootstrap-additions.min.css">
+	<script src="js/rcUtil.js"></script>
+    <script src="js/angular.min.js" data-semver="1.2.23"></script>
+    <script src="js/angular-animate.min.js" data-semver="1.2.23"></script>
+    <script src="js/angular-sanitize.min.js" data-semver="1.2.23"></script>
+	<script src="js/angular-strap/dist/angular-strap.js" data-semver="v2.1.1"></script>
+    <script src="js/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.1.1"></script>
+    
+  </head><body ng-controller="voteController" class="ng-scope">
+  
+  <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/rc" class="navbar-brand"><span id="graduateType" value="loadImages2015"></span>Research Conversazione 2015</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/rc" title=""><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="poster-category.html" title=""><span class="glyphicon glyphicon-picture"></span> Browse Posters</a></li>
+            <!--li><a href="controller.php?p=logout" title=""><span class="glyphicon glyphicon-log-out"></span> Logout</a></li-->
+          </ul>
+
+        </div>
+      </div>
+    </div>
+	
+  <!--section class="col-md-12 headerBg" id="sidebar1">
+	<div class="col-sm-12">
+		<div class="row">
+			<h1 class="col-md-12"><span id="graduateType" value="Undergraduate">Undergraduate</span> Poster Presentation <span class="yearElem"></span></h1>		
+		</div>
+	</div>
+  </section>
+ 
+  <div style="height:38px;"></div>
+   <nav class="navBg container-fluid">
+	<a class=" col-md-3 pull-right" href="login.html" title="Login" ng-show="authFail">Login</a>
+	<a class=" btn col-md-3 pull-right" href="controller.php?p=logout" title="Logout" ng-show="authSucc">
+		<span class="glyphicon glyphicon-log-out"></span> Logout
+	</a>
+  </nav-->
+  <article class="container">
+  
+  <!--[if lt IE 10]>
+<div class="row alert alert-danger text-center">
+<p class="col-sm-12">You're using old browser Internet Explorer. For better viewing this website, please upgrade to IE 11 or use the most modern browser google chrome. Click <a href="https://www.google.com/chrome/browser/" title="google chrome download" target="_blank">HERE</a> to download google chrome. </p></div>
+
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.js"></script>
+<script src="js/json2.js"></script>
+<script src="js/modernizr.custom.18666.js"></script>
+<![endif]-->
+	<div class="row text-center"><br/><br/>
+		<h2>Choose Graduate Category</h2>
+	</div>
+	<div class="row">
+		<div class="col-xs-6 col-md-4 col-lg-4 col-md-offset-2  col-lg-offset-2 item">
+			<a href="/rc/2015/undergraduate.html" title="undergraduate" class="thumbnail" target="_self">
+				<figure><img src="/rc/images/undergraduate.jpg" alt="undergraduate" class="img-responsive"/></figure>
+				<figcaption class="text-center"><span>Undergraduate</span></figcaption>
+			</a>
+		</div>
+		<div class="col-xs-6 col-md-4 col-lg-4 item">
+			<a href="/rc/2015/postgraduateCE.html" title="postgraduate civil engineering" class="thumbnail" target="_self">
+				<figure><img src="/rc/images/postgraduate.jpg" alt="postgraduate civil engineering" class="img-responsive"/></figure>
+				<figcaption class="text-center"><span>Postgraduate civil engineering</span></figcaption>
+			</a>
+		</div>
+	</div>
+	
+  </article>
+  <br/>
+  <!--nav class="navBg clearfix">
+	<p class="col-md-12 text-center">Copyright 2014 - <span id="yearElem"></span> sydney.edu </p>
+  </nav-->
+</body></html>
+<link rel="stylesheet" href="/rc/css/vote.css">
+<script src="/rc/js/vote_public.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

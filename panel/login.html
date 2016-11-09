@@ -1,0 +1,89 @@
+<!doctype html><html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="voteApp" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="Description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poster Presentation</title>
+  <base href="/rc/">
+  <link rel="icon" href="/views/img/quantumfi-icon.png">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.ori.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/rcUtil.js"></script>
+  <script src="js/angular.1.2.min.js"></script>
+  </head><body class="ng-scope">
+  <header class="headerBg text-center">
+	<h1>Poster Presentation <span class="yearElem"></span></h1>
+  </header>
+  
+  <nav class="navBg borderRad1 container-fluid">
+	<a class="navbar-header col-xs-10 text-right" href="panel/register.html" title="Register">Register</a>
+  </nav>
+  <br/>
+  <article class="container" ng-controller="voteController" >
+  <!--[if lt IE 10]>
+<div class="row alert alert-danger text-center">
+<p class="col-sm-12">You're using old browser Internet Explorer. For better viewing this website, please upgrade to IE 11 or use the most modern browser google chrome. Click <a href="https://www.google.com/chrome/browser/" title="google chrome download" target="_blank">HERE</a> to download google chrome. </p></div>
+
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.js"></script>
+<script src="js/json2.js"></script>
+<script src="js/modernizr.custom.18666.js"></script>
+<![endif]-->
+    <div class="row">
+	  <section class="col-md-6 col-md-offset-3 borderRad" id="mainBody">
+	    <h2 class="text-center headerBg borderRad">Lecturer Login</h2>
+		<div class="col-md-12 alert text-center well" ng-show="showMsg">{{msg}}</div>
+	    <form class="form-horizontal" name="loginForm"  >
+		  
+			<div class="form-group">
+			  <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+			  <div class="col-lg-10">
+				<input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="email" ng-required="1" required>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+			  <div class="col-lg-10">
+				<input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="pass" ng-required="1" required>
+			  </div>
+			</div>
+			
+			<div class="form-group">
+			  <div class="col-lg-10 col-lg-offset-2">
+				<!--button class="btn btn-default">Cancel</button-->
+				<button type="submit" class="btn btn-primary" ng-click="login()">Login</button>
+			  </div>
+			</div>
+		</form>
+	  </section>
+	</div>
+  </article>
+  <br/>
+</body></html>
+<script>
+angular.module('voteApp', []).controller('voteController', ['$scope', '$http', function($scope, $http) {
+  $scope.showMsg=0;
+  $scope.loginForm = {};
+  
+  $scope.login = function(){
+	var dataObject = {
+	   email : $scope.email
+	  ,pass  : $scope.pass
+    };
+
+    $http.post('panel/controller.php?p=vlogin', dataObject).success(function(data) {
+		//alert(data);
+		if ('success'==data['code']){
+			window.location.replace('/rc/panel/');
+		}else{
+			$scope.msg=data['msg'];
+			$scope.showMsg=1;
+		}
+	 }).
+	 error(function(data, status){
+		$scope.msg=data['code'];
+		$scope.showMsg=1;
+	 });
+  }
+}]);
+</script>

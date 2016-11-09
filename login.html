@@ -1,0 +1,120 @@
+<!doctype html><html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" xmlns:ng="http://angularjs.org" id="ng-app" class="no-js" lang="en" ng-app="voteApp"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="Description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Conversazione</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.ori.css">
+  <link rel="stylesheet" href="css/main.css">
+	  
+	<script src="js/rcUtil.js"></script>
+	<!--script id="angularScript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js"></script-->
+	<script id="angularScript" src="js/angular.1.2.min.js"></script>
+	<script src="js/modernizr.custom.18666.js"></script>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="//quantumfi.com.au/shared/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+	angular.module('voteApp', []).controller('voteController', ['$scope', '$http', '$window', function($scope, $http, $window) {
+	  localStorage["email"] = '';
+	  
+	  $scope.showMsg=0;
+	  $scope.loginForm = {};
+	  
+	  $scope.login = function(){
+		var dataObject = {
+		   email : $scope.email
+		  ,pass  : $scope.pass
+		};
+
+		$http.post('controller.php?p=login', dataObject).
+		  success(function(data) {
+			if ('success'==data['code']){
+				window.location.replace('/rc/student.html');
+			}else{
+				$scope.msg=data['msg'];
+				$scope.showMsg=1;
+			}
+		 }).
+		 error(function(data, status){
+			$scope.msg=data['code'];
+			$scope.showMsg=1;
+		 });
+	  }
+	}]);
+	</script>
+  </head><body ng-controller="voteController" class="ng-scope">
+  <!--header class="headerBg text-center">
+	<h1>Poster Presentation <span class="yearElem"></span></h1>
+  </header-->
+  
+  <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/rc" class="navbar-brand">Research Conversazione <span class="yearElem"></span></a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/rc" title=""><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="poster-category.html" title=""><span class="glyphicon glyphicon-picture"></span> Posters</a></li>
+            <li><a href="register.html" title="Register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+	
+  <!--nav class="navBg borderRad1 container-fluid">
+	<div class="navbar-header col-xs-12 text-right">
+		<a class="" href="poster-category.html" title="Posters"><span class="glyphicon glyphicon-picture"></span> Posters</a>&nbsp;&nbsp;
+		<a class="" href="register.html" title="Register"><span class="glyphicon glyphicon-user"></span> Register</a>
+	</div>
+  </nav>
+  <br/-->
+  <article class="container">
+  <!--[if lt IE 10]>
+<div class="row alert alert-danger text-center">
+<p class="col-sm-12">You're using old browser Internet Explorer. For better viewing this website, please upgrade to IE 11 or use the most modern browser google chrome. Click <a href="https://www.google.com/chrome/browser/" title="google chrome download" target="_blank">HERE</a> to download google chrome. </p></div>
+
+<script src="/js/html5shiv.js"></script>
+<script src="/js/respond.js"></script>
+<script src="/js/json2.js"></script>
+<script src="/js/modernizr.custom.18666.js"></script>
+<![endif]-->
+    <div class="row">
+	  <section class="col-md-6 col-md-offset-3 borderRad" id="mainBody">
+	    <h2 class="text-center headerBg borderRad">Student Login</h2>
+		<div class="col-md-12 alert text-center well" ng-show="showMsg">{{msg}}</div>
+	    <form class="form-horizontal" name="loginForm"  >
+		  
+			<div class="form-group">
+			  <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+			  <div class="col-lg-10">
+				<input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="email" ng-required="1" required>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+			  <div class="col-lg-10">
+				<input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="pass" ng-required="1" required>
+			  </div>
+			</div>
+			
+			<div class="form-group">
+			  <div class="col-lg-10 col-lg-offset-2">
+				<!--button class="btn btn-default">Cancel</button-->
+				<button type="submit" class="btn btn-primary" ng-click="login()">Login</button>
+			  </div>
+			</div>
+		</form>
+	  </section>
+	</div>
+  </article>
+  <br/>
+</body></html>

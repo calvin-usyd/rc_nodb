@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" id="ng-app" ng-app="voteApp"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/views/img/quantumfi-icon.png">
+
+    <title>Research Conversazione selection</title>
+	<base href="/rc/">
+    <link rel="stylesheet" href="//quantumfi.net/shared/bootstrap/css/bootstrap.min.css">
+	<!--link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css"/-->
+	<link rel="stylesheet" href="css/main.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/minority-game/views/js/lt_IE9/html5shiv.min.js"></script>
+      <script src="/minority-game/views/js/lt_IE9/respond.min.js"></script>
+    <![endif]-->
+	
+	<script src="js/rcUtil.js"></script>
+    <script src="js/angular.min.js" data-semver="1.2.23"></script>
+    <script src="js/angular-animate.min.js" data-semver="1.2.23"></script>
+    <script src="js/angular-sanitize.min.js" data-semver="1.2.23"></script>
+	<script src="js/angular-strap/dist/angular-strap.js" data-semver="v2.1.1"></script>
+    <script src="js/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.1.1"></script>
+	<!--script src="/rc/js/panel.js"></script-->
+  </head>
+
+  <body ng-controller="voteController" class="ng-scope">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="//quantumfi.net/shared/ie10-viewport-bug-workaround.js"></script>
+
+  <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/rc" class="navbar-brand">Research Conversazione <span class="yearElem"></span></a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/rc" title=""><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="poster-category.html" title=""><span class="glyphicon glyphicon-picture"></span> Browse Posters</a></li>
+            <!--li><a href="controller.php?p=logout" title=""><span class="glyphicon glyphicon-log-out"></span> Logout</a></li-->
+          </ul>
+        </div>
+      </div>
+    </div>
+	
+	<!--section class="col-md-12 headerBg" id="sidebar1">
+		<div class="row">
+			<h1 class="col-md-12">Poster Presentation <span class="yearElem"></span></h1>		
+		</div>
+	</section>
+	
+  <nav class="navBg borderRad1 container-fluid">
+	<a class="navbar-header col-xs-11 text-right" href="panel/controller.php?p=logout" title="">Logout</a>
+  </nav-->
+	<main class="container" id="qfGraduateList" ng-show="showGraduateList">
+		<div class="row text-center">
+			Year: 
+			<div><a href="2014/poster.html" title="poster 2014" class="">2014</a></div>
+			<div><a href="2015/poster.html" title="poster 2015" class="">2015</a></div>
+			<div><a href="2016/poster.html" title="poster 2016" class="">2016</a></div>
+		</div>
+		
+		<div class="row text-center"><br/><br/>
+			<h2>Event Photo 2015</h2>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4 item">
+				<a href="/rc/2015/event.html" title="Event photo 2015" class="thumbnail" target="_self">
+					<figure><img src="/rc/images/postgraduatePM.jpg" alt="Event photo 2015" class="img-responsive"/></figure>
+					<figcaption class="text-center"><span>Event photo 2015</span></figcaption>
+				</a>
+			</div>
+		</div>
+	</main>
+
+	<style>
+	#qfGraduateList .item{
+	  //margin: 10px 0;
+	}
+	#qfGraduateList figcaption {
+	   height: 55px;
+	   line-height: 55px;
+	}
+	#qfGraduateList figcaption span{
+	  display: inline-block;
+	  vertical-align: middle;
+	  line-height: normal;  
+	}
+	#qfGraduateList figure {
+	  display: block;
+	  overflow: hidden;
+	}
+	@media (min-width: 1001px){
+	#qfGraduateList figure {
+	  //height: 300px;
+	}
+	}
+	@media (max-width: 1000px){
+	#qfGraduateList figure {
+	  height: 220px;
+	}
+	}
+	@media (max-width: 600px){
+	#qfGraduateList figure {
+	  height: 160px;
+	}
+	}
+	</style>
+</body></html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//quantumfi.net/shared/bootstrap/js/bootstrap.min.js"></script>

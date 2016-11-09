@@ -1,0 +1,102 @@
+<!doctype html><html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" xmlns:ng="http://angularjs.org" id="ng-app" class="no-js" lang="en" ng-app="voteApp"><head>
+  <meta charset="utf-8">
+  <meta name="Description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poster Presentation</title>
+  <base href="http://quantumfi.net/rc/">
+  <link rel="icon" href="/views/img/quantumfi-icon.png">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.ori.css">
+  <link rel="stylesheet" href="css/main.css">
+  
+  <script src="js/rcUtil.js"></script>
+  <script id="angularScript" src="js/angular.1.2.min.js"></script>
+  </head><body ng-controller="registerController">
+  <header class="headerBg text-center">
+	<h1>Poster Presentation <span class="yearElem"></span></h1>
+  </header>
+  
+  <nav class="navBg borderRad1 container-fluid">
+	<a class="navbar-header col-xs-10 text-right" href="panel/login.html" title="">Login</a>
+  </nav>
+  <br/>
+  <article class="container">
+  <!--[if lt IE 10]>
+<div class="row alert alert-danger text-center">
+<p class="col-sm-12">You're using old browser Internet Explorer. For better viewing this website, please upgrade to IE 11 or use the most modern browser google chrome. Click <a href="https://www.google.com/chrome/browser/" title="google chrome download" target="_blank">HERE</a> to download google chrome. </p></div>
+
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.js"></script>
+<script src="js/json2.js"></script>
+<script src="js/modernizr.custom.18666.js"></script>
+<![endif]-->
+    <div class="row">
+	  <section class="col-md-6 col-md-offset-3 borderRad" id="mainBody">
+	    <h2 class="text-center headerBg borderRad">Register</h2>
+		<div class="well text-center col-md-12" ng-show="msgShow">{{msgReg}}</div>
+	    <form class="form-horizontal">
+			<div class="form-group">
+			  <label for="inputName" class="col-lg-2 control-label">Name</label>
+			  <div class="col-lg-10">
+				<input type="text" class="form-control" id="inputName" placeholder="Name" ng-model="regName" ng-required="true" required>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+			  <div class="col-lg-10">
+				<input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="email" ng-required="true" required>
+			  </div>
+			</div>
+			
+			<div class="form-group">
+			  <div class="col-lg-10 col-lg-offset-2">
+				<!--button class="btn btn-default">Cancel</button-->
+				<button type="submit" class="btn btn-primary" ng-click="register()" ng-disabled="loader">&nbsp;&nbsp;Register&nbsp;&nbsp;
+				<img src="http://quantumfi.net/rc/images/loader.gif" width="20" class="pull-right" ng-show="loader"/></button>
+			  </div>
+			</div>
+		</form>
+	  </section>
+	</div>
+  </article>
+  <br/>
+</body></html>
+<script>
+angular.module('voteApp', []).controller('registerController', ['$scope', '$http', function($scope, $http) {
+  $scope.msgShow = 0;
+  $scope.loader = 0;
+  
+  $scope.isFormValid = function(){
+    if ($scope.email){
+        return true;
+	}
+	if ($scope.regName){
+        return true;
+	}
+  }
+  
+  $scope.register = function(){
+    if ($scope.isFormValid()){
+	   $scope.loader = 1;
+	   var dataObject = {
+		   email : $scope.email,
+		   regName : $scope.regName
+		};
+		
+	   $http.post('panel/controller.php?p=vregister',dataObject).
+		success(function(data) {
+			$scope.msgShow = 1;
+			$scope.msgReg = data['msg'];
+			$scope.loader = 0;
+			$scope.email = '';
+		}).
+		error(function(data, status){
+			$scope.msgReg = data;
+			//console.log('Server error '+data);
+		});
+	}else{
+		$scope.msgReg = 'Please key in your email address.';
+	}
+  }
+  
+}]);
+</script>

@@ -1,0 +1,147 @@
+<!doctype html><html xmlns:ng="http://angularjs.org" id="ng-app" lang="en" ng-app="voteApp"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="Description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poster Presentation</title>
+  <base href="/rc/">
+  <link rel="icon" href="/views/img/quantumfi-icon.png">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.ori.css">
+  <link rel="stylesheet" href="css/main.css">
+  
+    <link rel="stylesheet" href="css/angular-motion.min.css">
+    <link rel="stylesheet" href="css/bootstrap-additions.min.css">
+	<script src="js/rcUtil.js"></script>
+    <script src="js/angular.min.js" data-semver="1.2.23"></script>
+    <script src="js/angular-animate.min.js" data-semver="1.2.23"></script>
+    <script src="js/angular-sanitize.min.js" data-semver="1.2.23"></script>
+	<script src="js/angular-strap/dist/angular-strap.js" data-semver="v2.1.1"></script>
+    <script src="js/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.1.1"></script>
+    
+  </head><body ng-controller="voteController" class="ng-scope">
+  <section class="col-md-12 navbar-fixed-top headerBg" id="sidebar1">
+	<div class="col-sm-5">
+		<div class="row">
+			<h1 class="col-md-12" style="font-size: 25px;"><span id="graduateType" value="PostgraduatePM">Postgraduate Project Management</span> Poster Presentation <span class="yearElem"></span></h1>		
+		</div>
+	</div>
+	<div class="col-sm-7">
+	    <small class="text-center row"><!--p class="col-sm-6">My Selection</p-->
+			<a ng-click="submitVote()" ng-show="submitBtn" class="col-sm-6 btn btn-warning center-block">Submit My Selection</a>
+			<a ng-click="toggleViewSelection()" class="col-sm-6 btn btn-info center-block">{{SelectionView}} &nbsp;<span class="badge">{{votes.length}}</span></a>
+		</small>
+		<div class="well alert-info row" ng-show="submitResult != ''">
+			{{submitResult}}
+			<a ng-click="closeSubmitResult()" ng-show="submitBtn" class="col-sm-2 pull-right btn btn-warning center-block text-center">Close</a>
+		</div>
+		<div ng-show="viewSelection">
+			<figure class="col-xs-2" ng-repeat="vote in votes track by $index">
+			 <a ng-href="rc/{{vote.pdfUrl}}" title="{{vote.imageName}}" target="_blank">
+				<img ng-src="rc/{{vote.imageUrl}}" alt="{{vote.imageName}}" title="{{vote.imageName}}" class="img-responsive img-thumbnail">
+			 </a>
+			 <small>{{vote.imageName}}</small>
+			 <span class="label label-default">Rank {{$index+1}}</span>
+			 <a ng-click="delVote(vote.imageId)" class="btn btn-danger center-block text-center">Remove</a><br/>
+			</figure>
+		</div>
+	</div>
+  </section>
+ 
+  <nav class="navBg borderRad1 container-fluid">
+	<a class="navbar-header col-xs-11 text-right" href="panel/controller.php?p=logout" title="">Logout</a>
+  </nav>
+  <br/>
+  <br/>
+  <div style="height:0;"></div>
+   <nav class="navBg container-fluid">
+	<a class=" col-md-3 pull-right" href="panel/login.html" title="Login" ng-show="authFail">Login</a>
+	<a class=" btn col-md-3 pull-right" href="panel/controller.php?p=logout" title="Logout" ng-show="authSucc">Logout</a>
+  </nav>
+  <article class="container">
+  
+  <!--[if lt IE 10]>
+<div class="row alert alert-danger text-center">
+<p class="col-sm-12">You're using old browser Internet Explorer. For better viewing this website, please upgrade to IE 11 or use the most modern browser google chrome. Click <a href="https://www.google.com/chrome/browser/" title="google chrome download" target="_blank">HERE</a> to download google chrome. </p></div>
+
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.js"></script>
+<script src="js/json2.js"></script>
+<script src="js/modernizr.custom.18666.js"></script>
+<![endif]-->
+	<h2 class="row text-center" ng-show="authFail">{{authMsg}}</h2>
+    <div class="row" ng-show="authSucc">
+	  <span class="text-muted">Any problem encountered, please email to: calvin.chiew@sydney.edu.au</span>
+	  
+	  <div class="col-md-10 col-md-offset-1 " id="mainBody" >
+	    <h2 class="text-center headerBg borderRad">Please Select Maximum 3 Best Posters Of The Year <span class="yearElem"></span></h2>
+		<div class="row"><br/>
+			<div class="col-md-11 center-block text-center">
+			  <div class="center-block text-center">
+				<form class="form-horizontal">
+				<div class="form-group">
+				  <label class="control-label col-lg-2">Search</label>
+				  <div class="input-group1 col-lg-7">
+					<input type="text" class="form-control" ng-model="searchKey" placeholder="Search any poster with keyword">
+				  </div>
+					<div class="col-lg-3">
+					  <button ng-click="search()" class="btn btn-default" type="button">Search</button>
+					  <div ng-click="allPoster()" class="btn btn-info">All Posters</div>
+					</div>
+				</div>
+				</form>
+			  </div>
+			</div>
+		</div>
+		<div class="row"><br/>
+			<div class="col-md-12 center-block text-center">
+			<div class="center-block text-center btn-group">
+				<button ng-click="paging(page)" class="btn btn-lg btn-primary col-sm-1 {{currentPaging==page? 'active': '';}}" ng-repeat="page in pagingArray">{{page}}</button> &nbsp;
+			</div>
+			</div>
+		</div>
+		<!--div class="row">
+			<div class="col-md-4"><button ng-click="prevPage()" class="btn btn-lg btn-primary col-sm-12" ng-show="(currPos - ttlItem) > 0"><&nbsp;&nbsp; Previous</button></div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4 pull right"><button ng-click="nextPage()" class="btn btn-lg btn-primary col-sm-12" ng-show="totalRec > currPos">Next &nbsp;&nbsp;></button></div>
+		</div--><br/>
+		<div class="">
+		  <div class="row">
+		  <div class="col-md-4 item borderRad1" ng-repeat="poster in posters track by $index">
+		  <div class=" ">
+			<a ng-href="rc/{{poster.pdfUrl}}" title="{{poster.imageName}}" target="_blank" class="itemBg center-block">
+				<!-- Service Item Image -->
+				<img ng-src="rc/{{poster.imageUrl}}" alt="{{poster.imageName}}" title="{{poster.imageName}}" class="img-responsive img-thumbnail grow">
+				<div class="item-text center-block text-center">
+					<!-- Item Heading and paragraph -->
+					<b><small><br/>{{poster.student1}}</small></b>
+				</div>
+			</a>
+			<button ng-click="addVote(poster)" class="btn btn-primary col-sm-6">Select</button>
+			<button ng-click="detail(poster.pdfUrl)" class="btn btn-default col-sm-6" bs-modal="modal">Detail</button>
+		  </div><br/><br/><br/>
+		  </div>
+		  </div>
+		</div>
+		<!--div class="row"><br/>
+			<div class="col-md-4"><button ng-click="prevPage()" class="btn btn-lg btn-primary col-sm-12" ng-show="(currPos - ttlItem) > 0"><&nbsp;&nbsp; Previous</button></div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4 pull right"><button ng-click="nextPage()" class="btn btn-lg btn-primary col-sm-12" ng-show="totalRec > currPos">Next &nbsp;&nbsp;></button></div>
+		</div-->
+		
+		<div class="row"><br/>
+			<div class="col-md-12 center-block text-center">
+			<div class="center-block text-center btn-group">
+				<button ng-click="paging(page)" class="btn btn-lg btn-primary col-sm-1 {{currentPaging==page? 'active': '';}}" ng-repeat="page in pagingArray">{{page}}</button> &nbsp;
+			</div>
+			</div>
+		</div>
+	  </div>
+	</div>
+  </article>
+  <br/>
+  <!--nav class="navBg clearfix">
+	<p class="col-md-12 text-center">Copyright 2014 - <span id="yearElem"></span> sydney.edu </p>
+  </nav-->
+</body></html>
+<link rel="stylesheet" href="/rc/css/vote.css">
+<script src="/rc/js/vote.js"></script>

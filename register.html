@@ -1,0 +1,131 @@
+<!doctype html><html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" xmlns:ng="http://angularjs.org" id="ng-app" class="no-js" lang="en" ng-app="voteApp"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="Description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Conversazione</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.ori.css">
+  <link rel="stylesheet" href="css/main.css">
+  </head><body ng-controller="registerController" class="ng-scope">
+  <!--header class="headerBg text-center">
+	<h1>Poster Presentation <span class="yearElem"></span></h1>
+  </header-->
+  
+  <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/rc" class="navbar-brand"> Research Conversazione <span class="yearElem"></span></a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/rc" title="Home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="poster-category.html" title="Posters"><span class="glyphicon glyphicon-picture"></span> Posters</a></li>
+            <li><a href="login.html" title="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <!--nav class="navBg borderRad1 container-fluid">
+	<a class="navbar-header col-xs-10 text-right" href="login.html" title="">Login</a>
+  </nav>
+  <br/-->
+  <article class="container">
+    <div class="row">
+	  <section class="col-md-6 col-md-offset-3 borderRad" id="mainBody">
+	    <h2 class="text-center headerBg borderRad">Register</h2>
+		<div class="well text-center col-md-12" ng-show="msgShow">{{msgReg}}</div>
+	    <form class="form-horizontal">
+			<div class="form-group">
+			  <label for="inputName" class="col-lg-2 control-label">Name</label>
+			  <div class="col-lg-10">
+				<input type="text" class="form-control" id="inputName" placeholder="Name" ng-model="regName" ng-required="true" required>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+			  <div class="col-lg-10">
+				<input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="email" ng-required="true" required>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label for="inputEmail" class="col-lg-2 control-label">Type</label>
+			  <div class="col-lg-10">
+				<select class="form-control" id="inputType" ng-model="type" ng-required="true" required>
+				  <!--option value="">Please Select one</option-->
+				  <option value="UndergraduateCE">Undergraduate Civil Engineering</option>
+				  <option value="PostgraduateCE">Postgraduate Civil Engineering</option>
+				  <option value="UndergraduatePM">Undergraduate project Management/Complex System</option>
+				  <option value="PostgraduatePM">Postgraduate project Management/Complex System</option>
+				</select>
+			  </div>
+			</div>
+			
+			<div class="form-group">
+			  <div class="col-lg-10 col-lg-offset-2">
+				<!--button class="btn btn-default">Cancel</button-->
+				<button type="submit" class="btn btn-primary" ng-click="register()" ng-disabled="loader">&nbsp;&nbsp;Register&nbsp;&nbsp;
+				<img src="images/loader.gif" width="20" class="pull-right" ng-show="loader"/></button>
+			  </div>
+			</div>
+		</form>
+	  </section>
+	</div>
+  </article>
+  <br/>
+</body></html>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//quantumfi.com.au/shared/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/rcUtil.js"></script>
+<script id="angularScript" src="js/angular.1.2.min.js"></script>
+<script src="js/modernizr.custom.18666.js"></script>
+<script>
+angular.module('voteApp', []).controller('registerController', ['$scope', '$http', function($scope, $http) {
+  $scope.msgShow = 0;
+  $scope.loader = 0;
+  
+  $scope.isFormValid = function(){
+    if ($scope.email){
+        return true;
+	}
+	if ($scope.regName){
+        return true;
+	}
+  }
+  
+  $scope.register = function(){
+    if ($scope.isFormValid()){
+	   $scope.loader = 1;
+	   var dataObject = {
+		   email : $scope.email,
+		   regName : $scope.regName, 
+           type : $scope.type
+		};
+		
+	   $http.post('controller.php?p=register',dataObject).
+		success(function(data) {
+			$scope.msgShow = 1;
+			$scope.msgReg = data['msg'];
+			$scope.loader = 0;
+			$scope.email = '';
+			$scope.regName = '';
+            $scope.type = '';
+		}).
+		error(function(data, status){
+			$scope.msgReg = data;
+			console.log('Server error '+data);
+		});
+	}else{
+		$scope.msgReg = 'Please key in your email address.';
+	}
+  }
+  
+}]);
+</script>
